@@ -1,0 +1,23 @@
+export function withHelpers<T extends HTMLElement>(el: T) {
+    return Object.assign(el, {
+        on(event: string, handler: EventListener) {
+            el.addEventListener(event, handler);
+            return el;
+        },
+        text(value: string) {
+            el.textContent = value;
+            return el;
+        },
+        link(value: string, href: string, attr: Record<string, string>) {
+            const a = document.createElement("a");
+            a.href = href;
+            a.textContent = value;
+
+            for (const k in attr) {
+                a.setAttribute(k, attr[k]);
+            }
+
+            return el;
+        }
+    });
+}

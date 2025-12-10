@@ -1,19 +1,17 @@
 {
-    "compilerOptions": {
-      "outDir": "dist",
-      "declaration": true,
-      "declarationMap": true,
-      "sourceMap": true,
-      "module": "ESNext",
-      "target": "ES6",
-      "moduleResolution": "Node",
-      "strict": true,
-      "lib": ["DOM", "DOM.Iterable"],
-      "baseUrl": ".",
-      "paths": {
-        "@/*": ["src/*"]
-      }
-    },
-    "include": ["src/**/*"]
-  }
-  
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "module": "esnext",
+    "target": "ES6",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "lib": ["DOM", "DOM.Iterable"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*"]
+}

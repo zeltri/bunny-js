@@ -1,34 +1,34 @@
 {
-    "name": "@crobf/bunny-js",
-    "description": "Una librería minimalista para manipular el DOM",
-    "homepage": "https://bunny-js.crobf.tech",
-    "version": "1.0.0",
-    "author": {
-        "name": "CROBF",
-        "email": "crobf.arg@gmail.com",
-        "url": "https://github.com/CROBF-tech"
-    },
-    "main": "dist/bunny.es.js",
-    "type": "module",
-    "module": "dist/bunny.umd.js",
-    "types": "dist/index.d.ts",
-    "private": false,
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/CROBF-tech/bunny-js.git"
-    },
-    "files": [
-        "src",
-        "dist"
-    ],
-    "scripts": {
-        "prebuild": "vite build",
-        "build": "tsc --emitDeclarationOnly",
-        "postbuild": "google-closure-compiler --js dist/bunny.es.js --js_output_file dist/bunny.min.js --compilation_level SIMPLE"
-    },
-    "devDependencies": {
-        "@rollup/plugin-terser": "^0.4.4",
-        "google-closure-compiler": "^20240317.0.0",
-        "vite": "^7.2.7"
-    }
+  "name": "@crobf/bunny-js",
+  "description": "Una librería minimalista para manipular el DOM",
+  "homepage": "https://bunny-js.crobf.tech",
+  "version": "2.0.0",
+  "author": {
+    "name": "CROBF",
+    "email": "crobf.arg@gmail.com",
+    "url": "https://github.com/CROBF-tech"
+  },
+  "main": "dist/bunny.es.js",
+  "type": "module",
+  "module": "dist/bunny.umd.js",
+  "types": "dist/index.d.ts",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CROBF-tech/bunny-js.git"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "prebuild": "vite build",
+    "build": "tsc --emitDeclarationOnly",
+    "postbuild": "google-closure-compiler --js dist/bunny.es.js --js_output_file dist/bunny.min.js --compilation_level SIMPLE"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "google-closure-compiler": "^20240317.0.0",
+    "vite": "^7.2.7"
+  }
 }
