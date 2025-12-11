@@ -19,6 +19,15 @@ export function withHelpers<T extends HTMLElement>(el: T) {
 
             return el;
         },
+        item(value: string, attrs: Record<string, string>) {
+            const li = document.createElement("li");
+            li.innerHTML = value;
+            for (const k in attrs) {
+                li.setAttribute(k, attrs[k]);
+            }
+            el.appendChild(li);
+            return el;
+        },
         attr(key: string, value?: string): string | null {
             if (!value) return el.getAttribute(key);
 

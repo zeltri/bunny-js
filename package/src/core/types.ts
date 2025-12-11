@@ -10,6 +10,7 @@ export type BunnyExtendedElement = HTMLElement & {
     on(event: keyof HTMLElementEventMap, handler: EventListener): BunnyExtendedElement;
     text(value: string): BunnyExtendedElement;
     link(value: string, href: string, attrs: Record<string, string>): BunnyExtendedElement;
+    item(value: string, attrs: Record<string, string>): BunnyExtendedElement;
     attr(key: string, value?: string): string | null;
     // Styles...
     bg(color: string): BunnyExtendedElement;
