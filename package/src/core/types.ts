@@ -7,9 +7,10 @@ export type BunnyExtendedElement = HTMLElement & {
     toggle(mode?: string): void;
     insertIn(query: string): void;
     // Helpers...
-    on(event: string, handler: EventListener): BunnyExtendedElement;
+    on(event: keyof HTMLElementEventMap, handler: EventListener): BunnyExtendedElement;
     text(value: string): BunnyExtendedElement;
     link(value: string, href: string, attrs: Record<string, string>): BunnyExtendedElement;
+    attr(key: string, value?: string): string | null;
     // Styles...
     bg(color: string): BunnyExtendedElement;
     color(color: string): BunnyExtendedElement;

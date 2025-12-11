@@ -1,6 +1,6 @@
 export function withHelpers<T extends HTMLElement>(el: T) {
     return Object.assign(el, {
-        on(event: string, handler: EventListener) {
+        on(event: keyof HTMLElementEventMap, handler: EventListener) {
             el.addEventListener(event, handler);
             return el;
         },
@@ -18,6 +18,13 @@ export function withHelpers<T extends HTMLElement>(el: T) {
             }
 
             return el;
+        },
+        attr(key: string, value?: string): string | null {
+            if (!value) return el.getAttribute(key);
+
+            el.setAttribute(key, value);
+
+            return value;
         }
     });
 }

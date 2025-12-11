@@ -1,6 +1,7 @@
 import { enhanceElement } from "@/decorators/all";
-import type { DynamicProxy } from "./types";
+import type { DynamicProxy } from "@/core/types";
 import { BunnyElement } from "@/core/element";
+import { htmlTagNames } from "@/utils/tags";
 
 export const BunnyJS = new Proxy(BunnyElement, {
     get(_, prop) {
@@ -17,6 +18,10 @@ export const BunnyJS = new Proxy(BunnyElement, {
                     const found = Array.from(document.querySelectorAll<HTMLElement>(selector));
                     return found.map(e => enhanceElement(e));
                 };
+            }
+
+            if (!htmlTagNames.includes(String(prop))) {
+                throw new Error(`Invalid html tag: ${String(prop)}`);
             }
 
             const el = document.createElement(prop as keyof HTMLElementTagNameMap);
