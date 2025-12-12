@@ -1,14 +1,15 @@
 
 import { CodeBlock } from "../ui/CodeBlock";
 
-const installationCode = `<!-- Usando CDN -->
-<script src="https://cdn.bunnyjs.org/bunny.min.js"></script>
+const quickStartCode = `import { BunnyJS } from "@crobf/bunny-js";
 
-<!-- O instalando via npm -->
-npm install bunny-js
+// Crear un elemento
+const div = BunnyJS.div({ class: "mi-clase" });
+div.text("¡Hola Mundo!").bg("lightblue").insertIn(document.body);
 
-// Y luego importándolo
-import bunny from 'bunny-js';`;
+// Seleccionar elementos existentes
+const button = BunnyJS.select("#mi-boton");
+button.on("click", () => alert("¡Clic!"));`;
 
 export const InstallationSection = () => {
   return (
@@ -17,15 +18,17 @@ export const InstallationSection = () => {
         Instalación
       </h2>
       <p className="mb-4 text-gray-700">
-        Puedes incluir bunny en tu proyecto de varias maneras:
+        Puedes incluir Bunny-JS en tu proyecto de varias maneras:
       </p>
-      <h4>Usando CDN:</h4>
-      <CodeBlock code='<script src="https://unpkg.com/@crobf/bunny-js@latest/dist/bunny.umd.js"></script>' />
-      <h4>O instalando via npm:</h4>
-      <CodeBlock code='npm i @crobf/bunny-js' />
-      <p className="mt-4 text-gray-700">
-        Después de instalar, puedes usar el objeto <code className="bg-gray-100 px-1 py-0.5 rounded text-bunny-black">bunny</code> para acceder a todas las funcionalidades de la librería.
+      <h4 className="font-semibold text-bunny-black mb-2">Instalando via npm:</h4>
+      <CodeBlock code='npm install @crobf/bunny-js' />
+      <h4 className="font-semibold text-bunny-black mb-2 mt-4">O usando yarn:</h4>
+      <CodeBlock code='yarn add @crobf/bunny-js' />
+      <h3 className="text-xl font-semibold text-bunny-black mt-8 mb-3">Inicio Rápido</h3>
+      <p className="mb-4 text-gray-700">
+        Después de instalar, importa <code className="bg-gray-100 px-1 py-0.5 rounded text-bunny-black">BunnyJS</code> y comienza a crear elementos:
       </p>
+      <CodeBlock code={quickStartCode} />
     </section>
   );
 };

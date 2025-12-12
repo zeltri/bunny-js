@@ -1,58 +1,46 @@
 
 import { CodeBlock } from "../ui/CodeBlock";
 
-const addElementExample = `// Importar BunnyJS
-import bunny from 'bunnyjs';
+const basicElementExample = `import { BunnyJS } from "@crobf/bunny-js";
 
-// Crear un div
-const miDiv = bunny.div();
+// Crear un div con clase
+const container = BunnyJS.div({ class: "container" });
 
-// Añadir texto al div
-miDiv.text('Hola, soy un div');
-
-// Añadir el div al cuerpo del documento
-miDiv.insertIn(document.body);
-`;
-
-const addElementWithEvents = `// Crear un botón con texto, ID y clase
-const miBoton = bunny.button('Haz clic');
-miBoton.id('miBoton');
-miBoton.addClass('boton-primario otra-clase');
-
-// Añadir eventos al botón
-miBoton.when('click', (target, event) => {
-  console.log(\`Botón \${target} clickeado\`);
+// Crear un botón con múltiples atributos
+const btn = BunnyJS.button({
+  type: "submit",
+  class: "btn btn-primary",
+  id: "submit-btn",
 });
 
-// Insertar en un elemento con ID 'app'
-miBoton.insertIn('#app');
-`;
+// Crear un input
+const input = BunnyJS.input({
+  type: "text",
+  placeholder: "Escribe algo...",
+});`;
 
-const complexExample = `const formulario = bunny.form()
-  .addClass('formulario')
-  .id('formularioContacto');
+const elementWithContentExample = `import { BunnyJS } from "@crobf/bunny-js";
 
-// Añadir título
-formulario.title('Formulario de Contacto', 2);
+// Crear un div y añadir texto
+const miDiv = BunnyJS.div({ class: "mi-clase" });
+miDiv.text("Hola, soy un div");
+miDiv.insertIn(document.body);
 
-// Añadir campos
-const campoNombre = formulario.div().addClass('campo');
-campoNombre.p('Nombre:');
-campoNombre.input('text').attr({ placeholder: 'Escribe tu nombre' });
+// Crear un enlace dentro de un div
+const container = BunnyJS.div();
+container.link("Visitar sitio", "https://example.com", { 
+  target: "_blank" 
+});
+container.insertIn(document.body);`;
 
-const campoEmail = formulario.div().addClass('campo');
-campoEmail.p('Email:');
-campoEmail.input('email').attr({ placeholder: 'Escribe tu email' });
+const listExample = `import { BunnyJS } from "@crobf/bunny-js";
 
-// Añadir botón
-formulario.button('Enviar')
-  .addClass('boton-enviar')
-  .when('click', (target, event) => {
-    // Lógica de envío
-  });
-
-// Insertar en el DOM
-formulario.insertIn('#app');`;
+// Crear una lista con elementos
+const ul = BunnyJS.ul({ class: "mi-lista" });
+ul.item("Elemento 1", { class: "list-item" });
+ul.item("Elemento 2", { class: "list-item" });
+ul.item("Elemento 3", { class: "list-item" });
+ul.insertIn(document.body);`;
 
 export const ElementsSection = () => {
   return (
@@ -61,14 +49,28 @@ export const ElementsSection = () => {
         Creación de elementos
       </h2>
       <p className="mb-4 text-gray-700">
-      BunnyJS se centra en la creación y manipulación de elementos del DOM a través de una interfaz fluida. Aquí hay algunos ejemplos básicos para empezar.
+        Crea cualquier elemento HTML con atributos iniciales usando BunnyJS. Todos los elementos HTML válidos están disponibles como métodos.
       </p>
-      <h4 className="my-5">Crear y añadir elementos al DOM.</h4>
-      <CodeBlock code={addElementExample} title="index.js" />
-      <h4 className="my-5">Crear elementos con eventos y atributos.</h4>
-      <CodeBlock code={addElementWithEvents} title="index.js"></CodeBlock>
-      <h4 className="my-5">Crear estructuras complejas.</h4>
-      <CodeBlock code={complexExample} title="index.js"></CodeBlock>
+      <h3 className="text-xl font-semibold text-bunny-black mt-6 mb-3">
+        Elementos básicos
+      </h3>
+      <CodeBlock code={basicElementExample} />
+
+      <h3 className="text-xl font-semibold text-bunny-black mt-6 mb-3">
+        Añadir contenido
+      </h3>
+      <p className="mb-4 text-gray-700">
+        Usa los métodos fluidos para añadir texto y contenido a los elementos.
+      </p>
+      <CodeBlock code={elementWithContentExample} />
+
+      <h3 className="text-xl font-semibold text-bunny-black mt-6 mb-3">
+        Crear listas
+      </h3>
+      <p className="mb-4 text-gray-700">
+        El método <code className="bg-gray-100 px-1 py-0.5 rounded text-bunny-black">item()</code> facilita la creación de listas.
+      </p>
+      <CodeBlock code={listExample} />
     </section>
   );
 };

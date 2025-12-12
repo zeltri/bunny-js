@@ -3,26 +3,28 @@ import { InstallationSection } from "./InstallationSection";
 import { ElementsSection } from "./ElementsSection";
 import { ManipulationSection } from "./ManipulationSection";
 import { EventsSection } from "./EventsSection";
-//import { HttpSection } from "./HttpSection";
-import { StateSection } from "./StateSection";
+import { StylesSection } from "./StylesSection";
+import { ApiSection } from "./ApiSection";
 import { UtilitiesSection } from "./UtilitiesSection";
 
 export const DocumentationContent = () => {
   return (
     <div className="max-w-3xl mx-auto">
       <h1 className="text-3xl md:text-4xl font-bold text-bunny-black mb-8">
-        Bunny - Maneja el DOM de manera sencilla
+        Bunny-JS - Manipulación del DOM simplificada
       </h1>
       <p className="text-gray-700 mb-8 text-lg">
-      En el desarrollo web moderno, muchas veces nos encontramos en situaciones donde necesitamos manipular el DOM pero no queremos la sobrecarga de un framework completo. BunnyJS surge como respuesta a esta necesidad, ofreciendo una alternativa ligera pero potente a bibliotecas como jQuery, con un enfoque más moderno basado en clases y con soporte nativo para TypeScript.
+        Bunny-JS es una librería ligera y fácil de usar que simplifica la manipulación del DOM en JavaScript.
+        Con una API fluida e intuitiva, puedes crear elementos HTML, seleccionar existentes y aplicar cambios de
+        manera encadenada. Sin dependencias externas y con soporte completo para TypeScript.
       </p>
 
       <InstallationSection />
       <ElementsSection />
       <ManipulationSection />
       <EventsSection />
-      {/*<HttpSection />*/}
-      <StateSection/>
+      <StylesSection />
+      <ApiSection />
       <UtilitiesSection />
     </div>
   );

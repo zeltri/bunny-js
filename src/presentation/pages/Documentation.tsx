@@ -11,8 +11,9 @@ const Documentation = () => {
     { id: "elementos", title: "Creación de elementos" },
     { id: "manipulacion", title: "Manipulación DOM" },
     { id: "eventos", title: "Eventos" },
-    { id: "estados", title: "Estados" },
-    { id: "utilidades", title: "Utilidades" },
+    { id: "estilos", title: "Estilos" },
+    { id: "api", title: "Referencia de API" },
+    { id: "utilidades", title: "Referencia Completa" },
   ];
 
   const scrollToSection = (sectionId: string) => {
@@ -25,10 +26,10 @@ const Documentation = () => {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
-      <DocumentationSidebar 
-        sections={sections} 
-        activeSection={activeSection} 
-        onSectionChange={scrollToSection} 
+      <DocumentationSidebar
+        sections={sections}
+        activeSection={activeSection}
+        onSectionChange={scrollToSection}
       />
       <main className="flex-1 p-6 md:p-8 lg:p-10 bg-white">
         <DocumentationContent />

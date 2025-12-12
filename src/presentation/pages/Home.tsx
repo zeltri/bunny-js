@@ -6,14 +6,18 @@ import { FeatureCard } from "../components/ui/FeatureCard";
 
 const Home = () => {
   // Example code snippets
-  const simpleExample = `// Crear y manipular elementos
-const button = bunny.button("Click me");
-button.when("click", (target) => {
-  target.text("¡Gracias por usar bunny!");
-});
+  const simpleExample = `import { BunnyJS } from "@crobf/bunny-js";
 
-// Aplicar estilos
-button.style({ backgroundColor: "#FFC700"});
+// Crear y manipular elementos
+const button = BunnyJS.button({ class: "btn" });
+button.text("Click me")
+  .bg("#FFC700")
+  .color("#000")
+  .on("click", () => {
+    button.text("¡Gracias por usar Bunny!");
+  });
+
+// Insertar en el DOM
 button.insertIn(document.body);`;
 
   return (
@@ -29,23 +33,23 @@ button.insertIn(document.body);`;
                 <span className="text-white">Simple. Rápido.</span>
               </h1>
               <p className="text-bunny-black/80 text-lg md:text-xl mb-8 max-w-lg">
-                Una pequeña librería JavaScript minimalista para crear y manipular elementos del DOM de forma sencilla y directa.
+                Una librería ligera para manipular el DOM con una API fluida e intuitiva. Crea, selecciona y transforma elementos HTML de manera encadenada.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  className="bg-bunny-black text-bunny-yellow hover:bg-bunny-black/90 text-lg px-8 py-6" 
+                <Button
+                  className="bg-bunny-black text-bunny-yellow hover:bg-bunny-black/90 text-lg px-8 py-6"
                   asChild
                 >
                   <Link to="/docs">Comenzar con Bunny</Link>
                 </Button>
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   className="border-bunny-black text-bunny-black hover:bg-bunny-black/10 text-lg px-8 py-6"
                   asChild
                 >
-                  <a 
-                    href="https://github.com/CROBF-tech/bunny-js" 
-                    target="_blank" 
+                  <a
+                    href="https://github.com/CROBF-tech/bunny-js"
+                    target="_blank"
                     rel="noopener noreferrer"
                   >
                     Ver en GitHub
@@ -55,7 +59,7 @@ button.insertIn(document.body);`;
             </div>
             <div className="md:w-1/2">
               <div className="transform rotate-0 hover:rotate-2 hover:scale-[1.1] transition-transform max-w-[80vw]">
-              <img src="/logo.png" alt="" className="max-w-[100%] mb-4" />
+                <img src="/logo.png" alt="" className="max-w-[100%] mb-4" />
               </div>
             </div>
           </div>
@@ -70,31 +74,31 @@ button.insertIn(document.body);`;
               ¿Por qué elegir bunny?
             </span>
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FeatureCard
-              title="Minimalista"
-              description="Solo lo esencial. Sin dependencias adicionales ni código innecesario que ralentice tu aplicación."
-            />
-            <FeatureCard
-              title="Directo"
-              description="Sintaxis clara y concisa. Evita encadenamientos innecesarios y se enfoca en un código limpio."
-            />
-            <FeatureCard
               title="Ligero"
-              description="Menos de 5KB minificado y comprimido. Carga rápida y rendimiento optimizado."
+              description="Sin dependencias externas. Mantén tu proyecto ligero y rápido sin código innecesario."
             />
             <FeatureCard
-              title="Moderno"
-              description="Desarrollado con JavaScript moderno y buenas prácticas para proyectos actuales."
+              title="Fluido"
+              description="API encadenable para un código más legible y elegante. Combina múltiples acciones en una sola línea."
             />
             <FeatureCard
-              title="Fácil de aprender"
-              description="Documentación clara y ejemplos sencillos para empezar a usar bunny en minutos."
+              title="TypeScript"
+              description="Soporte completo para tipado fuerte. Disfruta de autocompletado e intellisense en tu editor."
             />
             <FeatureCard
-              title="Vanilla JS"
-              description="Sin frameworks ni bibliotecas adicionales. Solo JavaScript puro para máxima compatibilidad."
+              title="Universal"
+              description="Funciona en todos los navegadores modernos sin necesidad de polyfills adicionales."
+            />
+            <FeatureCard
+              title="Intuitivo"
+              description="Métodos simples y directos para tareas comunes del DOM. Aprende en minutos."
+            />
+            <FeatureCard
+              title="Rápido"
+              description="Optimizado para rendimiento. Manipula el DOM de manera eficiente sin sobrecarga."
             />
           </div>
         </div>
@@ -109,24 +113,24 @@ button.insertIn(document.body);`;
                 Código simple y elegante
               </h2>
               <p className="text-bunny-black/80 text-lg mb-8">
-                bunny está diseñado para ser intuitivo y fácil de usar. Crea elementos, manipula el DOM y maneja eventos con una sintaxis clara y directa.
+                Bunny-JS está diseñado para ser intuitivo y fácil de usar. Crea elementos, manipula el DOM y maneja eventos con una sintaxis clara y encadenable.
               </p>
               <ul className="space-y-4 text-bunny-black/80">
                 <li className="flex items-start">
                   <span className="text-bunny-yellow bg-bunny-black rounded-[100%] py-1 px-2 mr-3 inline-flex">✓</span>
-                  <span>Creación de elementos simplificada</span>
+                  <span>Creación dinámica de elementos HTML</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-bunny-yellow bg-bunny-black rounded-[100%] py-1 px-2 mr-3 inline-flex">✓</span>
-                  <span>Manipulación del DOM directa</span>
+                  <span>Selección de elementos existentes</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-bunny-yellow bg-bunny-black rounded-[100%] py-1 px-2 mr-3 inline-flex">✓</span>
-                  <span>Manejo de eventos con eventos nativos</span>
+                  <span>Manejo de eventos simplificado</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-bunny-yellow bg-bunny-black rounded-[100%] py-1 px-2 mr-3 inline-flex">✓</span>
-                  <span>Solicitudes HTTP simplificadas</span>
+                  <span>Aplicación de estilos fluida</span>
                 </li>
               </ul>
             </div>
@@ -134,7 +138,7 @@ button.insertIn(document.body);`;
               <div className="bg-bunny-black/90 rounded-lg p-1 shadow-lg transform -rotate-1 hover:rotate-0 transition-transform max-w-[80vw]">
                 <CodeBlock
                   code={simpleExample}
-                  title="ajax-ejemplo.js"
+                  title="ejemplo-basico.js"
                 />
               </div>
             </div>
@@ -151,8 +155,8 @@ button.insertIn(document.body);`;
           <p className="text-bunny-yellow-light text-lg mb-10 max-w-2xl mx-auto">
             Comienza a utilizar bunny hoy mismo y descubre cómo puedes crear interacciones web de manera sencilla y eficiente.
           </p>
-          <Button 
-            className="bg-bunny-yellow text-bunny-black hover:bg-bunny-yellow/90 text-lg px-8 py-6 animate-bounce-subtle" 
+          <Button
+            className="bg-bunny-yellow text-bunny-black hover:bg-bunny-yellow/90 text-lg px-8 py-6 animate-bounce-subtle"
             asChild
           >
             <Link to="/docs">Comenzar con Bunny</Link>

@@ -1,61 +1,69 @@
 import { CodeBlock } from "../ui/CodeBlock";
 
-const manipulationCode = `// Crear un elemento y modificarlo
-const title = bunny.title("Título original: Un <h2></h2>", 2);
-title.text("Nuevo título");
+const selectionCode = `import { BunnyJS } from "@crobf/bunny-js";
 
-// Modificar atributos
-const image = bunny.img();
-image.attr("src", "imagen.jpg");
-image.attr("alt", "Descripción de la imagen");
-
-// Añadir/quitar clases
-const panel = bunny.div();
-panel.addClass("destacado");
-panel.removeClass("inactivo");
-
-// Modificar estilos
-const card = bunny.div();
-card.style("background-color", "#f5f5f5");
-card.style("padding", "20px");
-card.style("border-radius", "8px");
-
-// Clonar elementos
-const original = bunny.p("Original");
-const clon = original.clone();
-
-// Insertar elementos de forma encadenada
-const container = bunny.div()
-  .append(original)
-  .append(clon);
-
-// O más directo
-const button = container.button("Haz clic");
-
-// Insertar al final del body
-container.insertIn(document.body);`;
-
-const utilsMethods = `// Puedes obtener un elemento ya creado
-const miElemento = bunny.select('#miId');
-if (miElemento) {
-  // Y el resultado es un BunnyElement
-  miElemento.text('Nuevo texto');
+// Seleccionar un elemento único del DOM
+const header = BunnyJS.select(".header");
+if (header) {
+  header.text("Nuevo título");
+  header.bg("#f0f0f0");
 }
 
-// Seleccionar múltiples elementos por clase
-const elementos = bunny.selectAll('.miClase');
-elementos.forEach(el => {
-  el.text('Nuevo texto').addClass('modificado');
-});
+// Seleccionar múltiples elementos
+const items = BunnyJS.selectAll(".item");
+items.forEach(item => {
+  item.text("Elemento actualizado");
+  item.toggle("active");
+});`;
 
-// Esperar a que el DOM esté listo
-bunny.ready(() => {
-  const app = bunny.div()
-    .addClass('app-container')
-    .p('La aplicación está lista')
-    .insertIn(document.body);
-});
-`;
+const attributesCode = `import { BunnyJS } from "@crobf/bunny-js";
+
+const img = BunnyJS.img();
+
+// Establecer atributos
+img.attr("src", "image.jpg");
+img.attr("alt", "Descripción de imagen");
+
+// Obtener atributo
+const src = img.attr("src"); // 'image.jpg'
+
+// Encadenar atributos
+img.attr("width", "300").attr("height", "200");`;
+
+const visibilityCode = `import { BunnyJS } from "@crobf/bunny-js";
+
+const modal = BunnyJS.div({ class: "modal" });
+
+// Mostrar elemento (elimina display: none)
+modal.show();
+
+// Con un modo de display específico
+modal.show("flex");
+
+// Ocultar elemento
+modal.hide();
+
+// Alternar clases
+modal.toggle("active");
+modal.toggle("visible");
+
+// Alternar múltiples clases
+modal.toggle(["class1", "class2"]);`;
+
+const insertionCode = `import { BunnyJS } from "@crobf/bunny-js";
+
+const card = BunnyJS.div({ class: "card" });
+card.text("Contenido de la tarjeta");
+
+// Insertar en el body
+card.insertIn(document.body);
+
+// Insertar en un selector específico
+card.insertIn(".container");
+
+// O pasar un elemento HTMLElement directamente
+const container = document.querySelector(".container");
+card.insertIn(container);`;
 
 export const ManipulationSection = () => {
   return (
@@ -64,47 +72,40 @@ export const ManipulationSection = () => {
         Manipulación del DOM
       </h2>
       <p className="mb-4 text-gray-700">
-        Bunny ofrece una API fluida y poderosa para manipular el DOM de forma sencilla y eficiente. Puedes crear, modificar y gestionar elementos HTML con una sintaxis clara y encadenable.
+        Bunny-JS ofrece métodos potentes para seleccionar y manipular elementos existentes del DOM.
       </p>
-      <CodeBlock code={manipulationCode} />
+
+      <h3 className="text-xl font-semibold text-bunny-black mt-6 mb-3">
+        Selección de Elementos
+      </h3>
       <p className="mb-4 text-gray-700">
-        La biblioteca proporciona métodos de selección potentes para trabajar con elementos existentes y gestionar el ciclo de vida del DOM.
+        Selecciona elementos del DOM y mejóralos con los métodos de Bunny-JS.
       </p>
-      <CodeBlock code={utilsMethods} />
+      <CodeBlock code={selectionCode} />
+
+      <h3 className="text-xl font-semibold text-bunny-black mt-6 mb-3">
+        Atributos
+      </h3>
       <p className="mb-4 text-gray-700">
-        Incluyendo helpers para crear cualquier elemento HTML de forma rápida y sencilla. Aquí tienes una lista completa de los métodos disponibles:
+        Manipula atributos HTML con el método <code className="bg-gray-100 px-1 py-0.5 rounded text-bunny-black">attr()</code>.
       </p>
+      <CodeBlock code={attributesCode} />
 
-       <CodeBlock code={`
-// Elementos básicos
-bunny.div() // Crea un <div>
-bunny.p("Texto") // Crea un <p> con texto
-bunny.input("text") // Crea un <input type="text">
-bunny.button("Click me") // Crea un <button>
+      <h3 className="text-xl font-semibold text-bunny-black mt-6 mb-3">
+        Visibilidad y Clases
+      </h3>
+      <p className="mb-4 text-gray-700">
+        Controla la visibilidad y las clases CSS de los elementos.
+      </p>
+      <CodeBlock code={visibilityCode} />
 
-// Elementos de formulario
-bunny.input("text")           // Crea un <input type="text">
-bunny.button("Click me")      // Crea un <button>
-
-// Elementos de tabla
-bunny.table() // Crea una <table>
-bunny.row() // Crea un <tr>
-bunny.th("Encabezado") // Crea un <th>
-bunny.td("Celda") // Crea un <td>
-
-// Elementos de lista
-bunny.ul() // Crea una <ul>
-bunny.ol() // Crea una <ol>
-bunny.li("Item") // Crea un <li>
-
-// Títulos y texto
-bunny.title("Mi título", 1) // Crea un <h1>
-bunny.title("Subtítulo", 2) // Crea un <h2>
-bunny.title("Sección", 3) // Crea un <h3>
-
-// Elemento genérico
-bunny.element("custom") // Crea cualquier elemento HTML personalizado
-`} />
+      <h3 className="text-xl font-semibold text-bunny-black mt-6 mb-3">
+        Inserción en el DOM
+      </h3>
+      <p className="mb-4 text-gray-700">
+        Inserta elementos en el DOM con el método <code className="bg-gray-100 px-1 py-0.5 rounded text-bunny-black">insertIn()</code>.
+      </p>
+      <CodeBlock code={insertionCode} />
     </section>
   );
 };
