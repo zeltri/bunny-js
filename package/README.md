@@ -1,594 +1,223 @@
-# BunnyJS - Manipulación del DOM simple y eficiente
+# 🐰 Bunny-JS
 
-BunnyJS es una librería minimalista para JavaScript que facilita la manipulación del DOM sin depender de frameworks pesados. Con una API fluida e intuitiva, BunnyJS te permite crear, modificar y gestionar elementos HTML de manera elegante y eficiente.
+> Una librería minimalista para manipular el DOM de manera sencilla y elegante.
 
-## Introducción
+[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/CROBF-tech/bunny-js)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-En el desarrollo web moderno, muchas veces nos encontramos en situaciones donde necesitamos manipular el DOM pero no queremos la sobrecarga de un framework completo. BunnyJS surge como respuesta a esta necesidad, ofreciendo una alternativa ligera pero potente a bibliotecas como jQuery, con un enfoque más moderno basado en clases y con soporte nativo para TypeScript.
+Bunny-JS es una librería ligera y fácil de usar que simplifica la manipulación del DOM en JavaScript. Con una API fluida e intuitiva, puedes crear elementos HTML, seleccionar existentes y aplicar cambios de manera encadenada.
 
-### ¿Por qué BunnyJS?
-
-- **Minimalista pero completa**: Contiene solo lo necesario para manipular el DOM eficientemente
-- **API fluida**: Permite encadenar métodos para una sintaxis limpia y expresiva
-- **Orientada a objetos**: Utiliza clases y herencia para una estructura clara y extensible
-- **TypeScript nativo**: Diseñada con tipos desde el principio para un mejor autocompletado y detección de errores
-- **Independiente**: No requiere de otras bibliotecas o frameworks
-- **Moderna**: Aprovecha las APIs más recientes del navegador
-
-## Instalación
-
-### Mediante npm
+## 🚀 Instalación
 
 ```bash
-npm i @crobf/bunny-js
+npm install @crobf/bunny-js
 ```
 
-### Mediante unpkg
+O usando yarn:
 
-```html
-<script src="https://unpkg.com/@crobf/bunny-js@latest/dist/bunny.umd.js"></script>
+```bash
+yarn add @crobf/bunny-js
 ```
 
-## Uso Básico
-
-BunnyJS se centra en la creación y manipulación de elementos del DOM a través de una interfaz fluida. Aquí hay algunos ejemplos básicos para empezar:
-
-### Crear y añadir elementos
+## 📖 Inicio Rápido
 
 ```javascript
-// Importar BunnyJS
-import bunny from "@crobf/bunny-js";
+import { BunnyJS } from "@crobf/bunny-js";
 
-// Crear un div con texto
-const miDiv = bunny.div().text("Hola Mundo");
+// Crear un elemento
+const div = BunnyJS.div({ class: "mi-clase" });
+div.text("¡Hola Mundo!").bg("lightblue").insertIn(document.body);
 
-// Añadir el div al cuerpo del documento
-miDiv.insertIn(document.body);
+// Seleccionar elementos existentes
+const button = BunnyJS.select("#mi-boton");
+button.on("click", () => alert("¡Clic!"));
 ```
 
-### Crear elementos con atributos y eventos
+## 🎯 API
+
+### Creación de Elementos
+
+Crea cualquier elemento HTML con atributos iniciales:
 
 ```javascript
-// Crear un botón con texto, ID y manejador de eventos
-const miBoton = bunny
-  .button("Haz clic")
-  .id("miBoton")
-  .addClass("boton-primario")
-  .when("click", (target, event) => {
-    console.log("Botón clickeado");
-  });
+// Crear un div con clase
+const container = BunnyJS.div({ class: "container" });
 
-// Insertar en un elemento con ID 'app'
-miBoton.insertIn("#app");
+// Crear un botón con múltiples atributos
+const btn = BunnyJS.button({
+  type: "submit",
+  class: "btn btn-primary",
+  id: "submit-btn",
+});
+
+// Crear un input
+const input = BunnyJS.input({
+  type: "text",
+  placeholder: "Escribe algo...",
+});
 ```
 
-### Crear una estructura más compleja
+### Selección de Elementos
+
+Selecciona elementos del DOM existente:
 
 ```javascript
-const formulario = bunny.div().addClass("formulario").id("formularioContacto");
+// Seleccionar un elemento
+const header = BunnyJS.select(".header");
 
-// Añadir título
-formulario.title("Formulario de Contacto", 2);
-
-// Añadir campos
-const campoNombre = formulario
-  .div()
-  .addClass("campo");
-campoNombre.p("Nombre:");
-campoNombre.input("text")
-  .attr({ placeholder: "Escribe tu nombre" });
-
-const campoEmail = formulario
-  .div()
-  .addClass("campo");
-campoEmail.p("Email:");
-campoEmail.input("email")
-  .attr({ placeholder: "Escribe tu email" });
-
-// Añadir botón
-formulario
-  .button("Enviar")
-  .addClass("boton-enviar")
-  .when("click", (target, event) => {
-    // Lógica de envío
-  });
-
-// Insertar en el DOM
-formulario.insertIn("#app");
+// Seleccionar múltiples elementos
+const items = BunnyJS.selectAll(".item");
 ```
 
-## Guía de API
-
-### Objeto Principal: `bunny`
-
-El objeto `bunny` es el punto de entrada principal para trabajar con la librería. Proporciona métodos para crear diferentes tipos de elementos HTML y para manipular el DOM.
-
-#### Métodos de selección
-
-##### `bunny.select(selector)`
-
-Selecciona un elemento del DOM mediante un selector CSS.
-
-- **Parámetros**: `selector` (string) - Selector CSS para encontrar el elemento
-- **Retorna**: `BunnyContainer` con el elemento seleccionado o `null` si no se encuentra
-- **Ejemplo**:
-  ```javascript
-  const miElemento = bunny.select("#miId");
-  if (miElemento) {
-    miElemento.text("Nuevo texto");
-  }
-  ```
-
-##### `bunny.selectAll(selector)`
-
-Selecciona múltiples elementos del DOM mediante un selector CSS.
-
-- **Parámetros**: `selector` (string) - Selector CSS para encontrar los elementos
-- **Retorna**: Array de `BunnyContainer` con los elementos seleccionados
-- **Ejemplo**:
-  ```javascript
-  const parrafos = bunny.selectAll("p");
-  parrafos.forEach((p) => p.addClass("destacado"));
-  ```
-
-#### Método `ready`
-
-##### `bunny.ready(callback)`
-
-Ejecuta una función cuando el DOM esté completamente cargado.
-
-- **Parámetros**: `callback` (función) - Función a ejecutar
-- **Ejemplo**:
-  ```javascript
-  bunny.ready(() => {
-    console.log("DOM cargado completamente");
-    // Inicializar aplicación
-  });
-  ```
-
-#### Métodos de creación de elementos
-
-BunnyJS proporciona métodos para crear diferentes tipos de elementos HTML. Todos estos métodos retornan un objeto `BunnyContainer` que permite manipular el elemento creado.
-
-##### Elementos básicos
-
-- `bunny.div()` - Crea un elemento `<div>`
-- `bunny.p(texto)` - Crea un elemento `<p>` con texto opcional
-- `bunny.input(tipo)` - Crea un elemento `<input>` con tipo opcional (por defecto "text")
-- `bunny.button(texto)` - Crea un elemento `<button>` con texto opcional
-
-##### Elementos de tabla
-
-- `bunny.table()` - Crea un elemento `<table>`
-- `bunny.row()` - Crea un elemento `<tr>`
-- `bunny.th(texto)` - Crea un elemento `<th>` con texto opcional
-- `bunny.td(texto)` - Crea un elemento `<td>` con texto opcional
-
-##### Elementos de lista
-
-- `bunny.ul()` - Crea un elemento `<ul>`
-- `bunny.ol()` - Crea un elemento `<ol>`
-- `bunny.li(texto)` - Crea un elemento `<li>` con texto opcional
-
-##### Títulos
-
-- `bunny.title(texto, nivel)` - Crea un elemento de título (`<h1>` a `<h6>`) con el texto y nivel especificados
-
-##### Elemento genérico
-
-- `bunny.element(tagName)` - Crea un elemento con la etiqueta HTML especificada
-
-**Ejemplo**:
+### Manipulación de Texto y Contenido
 
 ```javascript
-// Crear varios tipos de elementos
-const miDiv = bunny.div();
-const miParrafo = bunny.p("Este es un párrafo");
-const miBoton = bunny.button("Haz clic");
-const miInput = bunny.input("email");
-const miTitulo = bunny.title("Título principal", 1);
-const miElemento = bunny.element("section");
+const div = BunnyJS.div();
+
+// Establecer texto
+div.text("Contenido del div");
+
+// Crear un enlace
+div.link("Visitar sitio", "https://example.com", { target: "_blank" });
+
+// Agregar elementos de lista
+const ul = BunnyJS.ul();
+ul.item("Elemento 1", { class: "list-item" });
+ul.item("Elemento 2", { class: "list-item" });
 ```
 
-### Clase: `BunnyContainer`
+### Eventos
 
-La clase `BunnyContainer` envuelve elementos HTML y proporciona métodos para manipularlos. Todos los métodos de creación de elementos en `bunny` devuelven instancias de `BunnyContainer`.
-
-#### Métodos de manipulación
-
-##### `id(id)`
-
-Establece el atributo ID del elemento.
-
-- **Parámetros**: `id` (string) - Valor del atributo ID
-- **Retorna**: `this` para encadenamiento
-- **Ejemplo**:
-  ```javascript
-  bunny.div().id("miContenedor");
-  ```
-
-##### `class(classes)` / `addClass(classes)`
-
-Añade clases CSS al elemento.
-
-- **Parámetros**: `classes` (string) - Clases a añadir, separadas por espacio
-- **Retorna**: `this` para encadenamiento
-- **Ejemplo**:
-  ```javascript
-  bunny.div().class("contenedor principal");
-  // o
-  bunny.div().addClass("contenedor principal");
-  ```
-
-##### `removeClass(classes)`
-
-Elimina clases CSS del elemento.
-
-- **Parámetros**: `classes` (string) - Clases a eliminar, separadas por espacio
-- **Retorna**: `this` para encadenamiento
-- **Ejemplo**:
-  ```javascript
-  miElemento.removeClass("destacado");
-  ```
-
-##### `style(styles)`
-
-Aplica estilos CSS al elemento.
-
-- **Parámetros**: `styles` (objeto) - Estilos CSS a aplicar
-- **Retorna**: `this` para encadenamiento
-- **Ejemplo**:
-  ```javascript
-  bunny.div().style({
-    backgroundColor: "#f0f0f0",
-    padding: "10px",
-    borderRadius: "5px",
-  });
-  ```
-
-##### `attr(attrs)`
-
-Establece múltiples atributos en el elemento.
-
-- **Parámetros**: `attrs` (objeto) - Atributos a establecer
-- **Retorna**: `this` para encadenamiento
-- **Ejemplo**:
-  ```javascript
-  bunny.input().attr({
-    type: "email",
-    placeholder: "Tu correo electrónico",
-    required: "true",
-  });
-  ```
-
-##### `text(texto)`
-
-Establece o devuelve el contenido de texto del elemento.
-
-- **Parámetros**: `texto` (string, opcional) - Texto a establecer
-- **Retorna**: `this` para encadenamiento o el texto actual si no se proporcionan parámetros
-- **Ejemplo**:
-
-  ```javascript
-  // Establecer texto
-  miElemento.text("Nuevo texto");
-
-  // Obtener texto
-  const textoActual = miElemento.text();
-  ```
-
-##### `html(contenido)`
-
-Establece o devuelve el contenido HTML del elemento.
-
-- **Parámetros**: `contenido` (string, opcional) - HTML a establecer
-- **Retorna**: `this` para encadenamiento o el HTML actual si no se proporcionan parámetros
-- **Ejemplo**:
-
-  ```javascript
-  // Establecer HTML
-  miElemento.html("<strong>Texto en negrita</strong>");
-
-  // Obtener HTML
-  const htmlActual = miElemento.html();
-  ```
-
-##### `when(evento, manejador)`
-
-Añade un manejador de eventos al elemento.
-
-- **Parámetros**:
-  - `evento` (string) - Tipo de evento (click, input, etc.)
-  - `manejador` (función) - Función a ejecutar cuando ocurra el evento
-- **Retorna**: `this` para encadenamiento
-- **Ejemplo**:
-  ```javascript
-  bunny.button("Guardar").when("click", (target, event) => {
-    console.log("Botón guardado clickeado");
-    alert("¡Datos guardados!");
-  });
-  ```
-
-##### `parent()`
-
-Obtiene el contenedor padre del elemento actual.
-
-- **Retorna**: `BunnyContainer` con el elemento padre o `null` si no existe
-- **Ejemplo**:
-  ```javascript
-  const padre = miElemento.parent();
-  if (padre) {
-    padre.addClass("contenedor-activo");
-  }
-  ```
-
-##### `insertIn(container)`
-
-Inserta el elemento en el contenedor especificado.
-
-- **Parámetros**: `container` (string | HTMLElement) - Selector CSS o elemento DOM
-- **Retorna**: `this` para encadenamiento
-- **Ejemplo**:
-  ```javascript
-  miElemento.insertIn("#app");
-  // o
-  miElemento.insertIn(document.getElementById("app"));
-  ```
-
-##### `remove()`
-
-Elimina el elemento del DOM.
-
-- **Ejemplo**:
-  ```javascript
-  miElemento.remove();
-  ```
-
-##### `map(callback)`
-
-Aplica una función a cada elemento hijo.
-
-- **Parámetros**: `callback` (función) - Función a aplicar a cada hijo
-- **Retorna**: `this` para encadenamiento
-- **Ejemplo**:
-  ```javascript
-  const lista = bunny.ul();
-  // Añadir elementos a la lista...
-  lista.map((item) => {
-    item.addClass("item-lista");
-  });
-  ```
-
-#### Obtención de elementos nativos
-
-##### `getElement()`
-
-Devuelve el elemento HTML nativo.
-
-- **Retorna**: Elemento HTML nativo
-- **Ejemplo**:
-  ```javascript
-  const elementoNativo = miElemento.getElement();
-  // Ahora puedes usar APIs nativas del DOM
-  elementoNativo.scrollIntoView();
-  ```
-
-##### `getContext()`
-
-Devuelve el elemento BunnyElement interno.
-
-- **Retorna**: Instancia de BunnyElement
-- **Ejemplo**:
-  ```javascript
-  const contexto = miElemento.getContext();
-  ```
-
-## Ejemplos Avanzados
-
-### Crear una tabla de datos
+Agrega event listeners fácilmente:
 
 ```javascript
-function crearTabla(datos) {
-  const tabla = bunny.table().addClass("tabla-datos");
+const button = BunnyJS.button({ class: "btn" });
 
-  // Crear encabezado
-  const encabezado = tabla.row();
-  Object.keys(datos[0]).forEach((clave) => {
-    encabezado.addHeader(clave);
-  });
+button.on("click", () => {
+  console.log("Botón clicado!");
+});
 
-  // Crear filas de datos
-  datos.forEach((fila) => {
-    const filaDatos = tabla.row();
-    Object.values(fila).forEach((valor) => {
-      filaDatos.addCell(String(valor));
-    });
-  });
-
-  return tabla;
-}
-
-// Uso
-const datos = [
-  { id: 1, nombre: "Juan", edad: 30 },
-  { id: 2, nombre: "Ana", edad: 25 },
-  { id: 3, nombre: "Carlos", edad: 28 },
-];
-
-const miTabla = crearTabla(datos);
-miTabla.insertIn("#app");
+button.on("mouseenter", (event) => {
+  event.target.style.opacity = "0.8";
+});
 ```
 
-### Crear un formulario dinámico
+### Estilos
+
+Aplica estilos CSS de manera fluida:
 
 ```javascript
-function crearFormulario(campos, onSubmit) {
+const card = BunnyJS.div({ class: "card" });
 
-  const form = bunny
-    .element("form")
-    .addClass("formulario-dinamico")
-    .when("submit", (_target, event) => {
-      event.preventDefault();
-
-      // Recopilar datos
-      const datos = {};
-      campos.forEach((campo) => {
-        const input = bunny.select(`#${campo.id}`);
-        if (input) {
-          datos[campo.id] = input.getElement().value;
-        }
-      });
-
-      // Llamar al callback
-      onSubmit(datos);
-    });
-
-  // Crear campos
-  campos.forEach((campo) => {
-    const contenedor = form.div().addClass("campo-formulario");
-
-    // Etiqueta
-    contenedor.p(campo.etiqueta);
-
-    // Input
-    contenedor
-      .input(campo.tipo || "text")
-      .id(campo.id)
-      .attr(campo.atributos || {});
-  });
-
-  // Botón de envío
-  form.button("Enviar").attr({ type: "submit" }).addClass("boton-submit");
-
-  return form;
-}
-
-// Uso
-const formulario = crearFormulario(
-  [
-    { id: "nombre", etiqueta: "Nombre:", atributos: { required: "true" } },
-    { id: "email", etiqueta: "Email:", tipo: "email" },
-    { id: "mensaje", etiqueta: "Mensaje:", tipo: "textarea" },
-  ],
-  (datos) => {
-    console.log("Datos enviados:", datos);
-  }
-);
-
-formulario.insertIn("#app");
+card
+  .bg("white")
+  .color("#333")
+  .font("Arial, sans-serif")
+  .spacing(["10px", "20px"], "15px");
 ```
 
-### Implementar una galería de imágenes simple
+### Visibilidad y Acciones
+
+Controla la visibilidad de elementos:
 
 ```javascript
-function crearGaleria(imagenes) {
-  const galeria = bunny.div().addClass("galeria-imagenes");
+const modal = BunnyJS.div({ class: "modal" });
 
-  // Contenedor principal
-  galeria.style({
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-    gap: "10px",
-  });
+// Mostrar elemento
+modal.show();
 
-  // Añadir imágenes
-  imagenes.forEach((img) => {
-    const contenedor = galeria.div().addClass("item-galeria").style({
-      overflow: "hidden",
-      borderRadius: "8px",
-      boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-    });
+// Ocultar elemento
+modal.hide();
 
-    // Crear elemento imagen
-    const imagen = contenedor
-      .element("img")
-      .attr({
-        src: img.url,
-        alt: img.titulo || "Imagen de galería",
-      })
-      .style({
-        width: "100%",
-        height: "auto",
-        display: "block",
-        transition: "transform 0.3s ease",
-      });
-
-    // Añadir efecto hover
-    contenedor
-      .when("mouseenter", (target) => {
-        target.style({ transform: "scale(1.05)" });
-      })
-      .when("mouseleave", (target) => {
-        target.style({ transform: "scale(1)" });
-      });
-
-    // Añadir título si existe
-    if (img.titulo) {
-      contenedor.p(img.titulo).style({
-        margin: "8px",
-        textAlign: "center",
-      });
-    }
-  });
-
-  return galeria;
-}
-
-// Uso
-const imagenes = [
-  { url: "img/foto1.jpg", titulo: "Paisaje" },
-  { url: "img/foto2.jpg", titulo: "Retrato" },
-  { url: "img/foto3.jpg", titulo: "Naturaleza" },
-];
-
-const miGaleria = crearGaleria(imagenes);
-miGaleria.insertIn("#app");
+// Alternar clases
+modal.toggle("className");
 ```
 
-## Preguntas Frecuentes
+### Atributos
 
-### ¿Por qué usar BunnyJS en lugar de vanilla JavaScript?
+Manipula atributos HTML:
 
-Aunque las APIs modernas del DOM son muy potentes, BunnyJS ofrece una sintaxis más concisa y expresiva gracias a su API fluida. Esto reduce la cantidad de código necesario y mejora la legibilidad, especialmente en aplicaciones con mucha manipulación del DOM.
+```javascript
+const img = BunnyJS.img();
 
-### ¿BunnyJS es compatible con frameworks como React o Vue?
+// Establecer atributo
+img.attr("src", "image.jpg");
+img.attr("alt", "Descripción de imagen");
 
-BunnyJS está diseñado para ser independiente, pero puede usarse junto con frameworks para manipular partes específicas del DOM que estén fuera del control del framework. Sin embargo, para aplicaciones complejas se recomienda elegir entre usar BunnyJS como solución completa o adoptar un framework integral.
+// Obtener atributo
+const src = img.attr("src"); // 'image.jpg'
+```
 
-### ¿Cómo extender BunnyJS con componentes personalizados?
+## ✨ Características
 
-Puedes extender BunnyJS creando tus propias clases que hereden de `BunnyElement` para comportamientos específicos. También puedes crear funciones de utilidad que generen estructuras complejas pero reutilizables, como se muestra en los ejemplos avanzados.
+- 🪶 **Ligero**: Sin dependencias externas
+- 🔗 **Fluido**: API encadenable para un código más legible
+- 🛡️ **TypeScript**: Soporte completo para tipado fuerte
+- 🌐 **Universal**: Funciona en todos los navegadores modernos
+- 🎨 **Intuitivo**: Métodos simples para tareas comunes
+- 🚀 **Rápido**: Optimizado para rendimiento
 
-### ¿BunnyJS funciona en todos los navegadores?
+## 📚 Ejemplos Avanzados
 
-BunnyJS utiliza APIs modernas del DOM, por lo que es compatible con todos los navegadores actuales. Sin embargo, para navegadores muy antiguos podría requerirse un polyfill para algunas funcionalidades.
+### Crear una lista de tareas
 
-### ¿Cómo optimizar el rendimiento al trabajar con listas grandes?
+```javascript
+const todoList = BunnyJS.ul({ class: "todo-list" });
 
-Para listas muy grandes, es recomendable utilizar fragmentos de documento (`DocumentFragment`) para reducir el número de reflow del DOM. BunnyJS ya utiliza esta técnica internamente en su implementación, pero para manipulaciones complejas, considera crear la estructura completa antes de insertarla en el DOM.
+const tasks = ["Comprar leche", "Llamar al doctor", "Hacer ejercicio"];
 
-## Contribuir
+tasks.forEach((task) => {
+  const li = BunnyJS.li().text(task);
+  li.on("click", () => li.toggle("completed"));
+  li.insertIn(todoList); // Equivalente a: todoList.appendChild(li);
+});
 
-¿Encontraste un bug o tienes una idea para mejorar BunnyJS? ¡Nos encantaría tu contribución!
+todoList.insertIn(document.body);
+```
 
-### Reportar problemas
+### Formulario interactivo
 
-1. Visita el repositorio en GitHub
-2. Crea un nuevo issue detallando el problema
-3. Incluye pasos para reproducirlo y el comportamiento esperado
+```javascript
+const form = BunnyJS.form({ class: "contact-form" });
 
-### Proponer mejoras
+const nameInput = BunnyJS.input({
+  type: "text",
+  placeholder: "Tu nombre",
+  required: true,
+});
 
-1. Haz fork del repositorio
-2. Crea una nueva rama con tu mejora
-3. Envía un pull request con una descripción clara de los cambios
+const emailInput = BunnyJS.input({
+  type: "email",
+  placeholder: "tu@email.com",
+  required: true,
+});
 
-### Directrices de contribución
+const submitBtn = BunnyJS.button({
+  type: "submit",
+  class: "btn-submit",
+});
+submitBtn.text("Enviar");
 
-- Mantén el código simple y minimalista
-- Asegúrate de incluir tipos para TypeScript
-- Documenta los cambios en el código
+form.on("submit", (e) => {
+  e.preventDefault();
+  alert("Formulario enviado!");
+});
+
+form.appendChild(nameInput);
+form.appendChild(emailInput);
+form.appendChild(submitBtn);
+form.insertIn(document.body);
+```
+
+## 🤝 Contribuyendo
+
+¡Las contribuciones son bienvenidas! Si encuentras un bug o tienes una idea para mejorar Bunny-JS, por favor abre un issue o envía un pull request en [GitHub](https://github.com/CROBF-tech/bunny-js).
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 
 ---
 
-¡Gracias por usar BunnyJS! Esperamos que esta librería te ayude a crear interfaces web de manera más sencilla y eficiente. Si tienes preguntas adicionales o necesitas ayuda, no dudes en crear un issue en nuestro repositorio.
+Hecho con ❤️ por [CROBF](https://crobf.tech)

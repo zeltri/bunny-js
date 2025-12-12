@@ -17,6 +17,7 @@ export function withHelpers<T extends HTMLElement>(el: T) {
                 a.setAttribute(k, attr[k]);
             }
 
+            el.appendChild(a);
             return el;
         },
         item(value: string, attrs: Record<string, string>) {
